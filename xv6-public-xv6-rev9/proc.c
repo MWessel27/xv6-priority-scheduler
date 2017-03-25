@@ -46,6 +46,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+  p->priority = 50;
 
   // Allocate kernel stack.
   if((p->kstack = kalloc()) == 0){
