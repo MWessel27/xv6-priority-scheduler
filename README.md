@@ -9,3 +9,20 @@
 5. Run 'make' to create xv6.img
 6. Run 'make qemu-nox' to run xv6 on linprog
     - quit the xv6 shell by typing 'Ctrl-A X'
+
+# Part 2: Setting up GDB
+1. Modify Makefile
+    - Comment out the CFLAGS entry on line 77
+    - Uncomment CFLAGS entry on line 78
+2. make clean
+3. make
+4. make qemu-nox-gdb
+5. Open another terminal session and run gdb
+
+# Helpful tips
+- Quitting xv6 shell:
+    - 'Ctrl-a x'
+
+- Quitting gdb session:
+    - First kill the terminal running `make qemu-nox-gdb`
+    - Then kill gdb terminal with `q` then hit the Enter key
