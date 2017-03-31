@@ -99,6 +99,8 @@ sys_getpri(void)
 int
 sys_setpriority(void){
     int ppri;
+    int prevppri;
+
     // get the argument from the caller
     argint(0, &ppri);
     
@@ -106,8 +108,16 @@ sys_setpriority(void){
     if(!ppri || (ppri < 0) || (ppri > 200)){
         return -1;
     }
+
+    // get the previous process priority
+    prevppri = proc->priority;
+
+    if(prevppri > ppri){
+      proc->priority = ppri;
+      yield();
+    } else {
+      proc->priority = ppri;
+    }
     
-    proc->priority = ppri;
-    
-    return 0;
+    return prevppri;
 }

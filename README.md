@@ -18,6 +18,12 @@
 4. `make qemu-nox-gdb`
 5. Open another terminal session and run gdb
 
+# Testing
+1. Run `make` to create xv6.img
+2. Run `make` qemu-nox' to run xv6 on linprog
+3. Once the shell opens, run `mytest1` at the xv6 prompt
+4. Check the results
+
 # Helpful tips
 - Quitting xv6 shell:
     - `Ctrl-a x`

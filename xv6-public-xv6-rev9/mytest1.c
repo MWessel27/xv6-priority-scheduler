@@ -96,6 +96,25 @@ setpri_high_test(void)
   }
 }
 
+void
+setpri_return_test(void)
+{
+  int prevpri;
+  int curpri;
+
+  // reset priority to 50
+  setpriority(50);
+
+  prevpri = setpriority(6);
+  curpri = getpri();                       
+  if(prevpri==50 && curpri==6){
+    printf(1, "    -PASSED. Previous priority = %d\n", prevpri);
+  } else {
+    printf(1,"    -**FAIL**\n");
+    printf(1, "      Priority should have returned previous priority: 50. Instead priority was = %d\n", prevpri);
+  }
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -109,5 +128,7 @@ main(int argc, char *argv[])
   setpri_low_test();
   printf(1, "\nCannot set priority higher than than 200\n");
   setpri_high_test();
+  printf(1, "\nSet priority function should return previous priority\n");
+  setpri_return_test();
   exit();
 }
