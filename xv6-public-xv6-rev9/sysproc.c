@@ -89,3 +89,25 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_getpri(void)
+{
+  return proc->priority;
+}
+
+int
+sys_setpriority(void){
+    int ppri;
+    // get the argument from the caller
+    argint(0, &ppri);
+    
+    // check if priority is valid
+    if(!ppri || (ppri < 0) || (ppri > 200)){
+        return -1;
+    }
+    
+    proc->priority = ppri;
+    
+    return 0;
+}
