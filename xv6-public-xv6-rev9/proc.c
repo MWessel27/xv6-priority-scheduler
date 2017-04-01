@@ -278,7 +278,9 @@ scheduler(void)
     // Enable interrupts on this processor.
     sti();
 
+    // Declare a variable to hold the current priority
     int curpri;
+    // Loop through 0-200 priorities and run the highest->lowest priority
     for(curpri = 0; curpri < 200; curpri++){
       // Loop over process table looking for process to run.
       acquire(&ptable.lock);
@@ -290,7 +292,8 @@ scheduler(void)
         // Switch to chosen process.  It is the process's job
         // to release ptable.lock and then reacquire it
         // before jumping back to us.
-        //cprintf("Priority [%d]\n", curpri);
+
+        // Check if priority is equal to the current priority
         if (p->priority == curpri) {
           proc = p;
           switchuvm(p);
@@ -411,10 +414,13 @@ wakeup1(void *chan)
 
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
     if(p->state == SLEEPING && p->chan == chan) {
+      // Get the current priority
       int priority = p->priority;
       if((priority - 2) < 0){
+        // If priority -2 is less than 0, set priority to 0
         p->priority=0;
       } else {
+        // Decrement priority by 2
         p->priority=priority-2;
       }
       p->state = RUNNABLE;

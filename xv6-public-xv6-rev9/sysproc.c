@@ -91,12 +91,6 @@ sys_uptime(void)
 }
 
 int
-sys_getpri(void)
-{
-  return proc->priority;
-}
-
-int
 sys_setpriority(void){
     int ppri;
     int prevppri;
